@@ -11,6 +11,6 @@ router.post("/", MoviesControllers.store);
 
 router.put("/:id", MoviesControllers.update);
 
-router.delete("/:id", MoviesControllers.delete);
+router.delete("/:id", MoviesControllers.destroy);
 
 module.exports = router;
