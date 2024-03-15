@@ -1,5 +1,6 @@
 const express = require("express");
 const MoviesControllers = require("../controllers/MoviesControllers");
+const { authorization } = require("../middleware/authHandler");
 
 const router = express.Router();
 
@@ -7,10 +8,10 @@ router.get("/", MoviesControllers.getAll);
 
 router.get("/:id", MoviesControllers.getMoviesById);
 
-router.post("/", MoviesControllers.store);
+router.post("/", authorization, MoviesControllers.store);
 
-router.put("/:id", MoviesControllers.update);
+router.put("/:id", authorization, MoviesControllers.update);
 
-router.delete("/:id", MoviesControllers.destroy);
+router.delete("/:id", authorization, MoviesControllers.destroy);
 
 module.exports = router;

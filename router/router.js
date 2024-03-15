@@ -5,8 +5,12 @@ const router = express.Router();
 const swaggerRouter = require('../swagger')
 const movieRouter = require('./movieRouter')
 const userRouter = require('./userRouter')
+const authRouter = require('./authRouter');
+const { authentication } = require("../middleware/authHandler");
 
 router.use('/', swaggerRouter)
+router.use('/api/auth', authRouter)
+router.use(authentication)
 router.use('/api/movies', movieRouter)
 router.use('/api/users', userRouter)
 
