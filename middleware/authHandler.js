@@ -9,8 +9,6 @@ const authentication = async (req, res, next) => {
     const { id } = jwt.verify(token, process.env.ACCESS_TOKEN_SECREt);
 
     const user = await UserRepository.getUserById(id)
-    console.log(user)
-    // const ssearchUser, [id]);
     if (user === null) {
         throw {name: "Unauthenticated"}
       };

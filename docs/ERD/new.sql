@@ -11,5 +11,5 @@ CREATE TABLE "movies" (
   "title" varchar(150) NOT NULL,
   "genres" varchar(59) NOT NULL,
   "year" varchar(255) NOT NULL,
-  "photo" char
+  "photo" varchar(255)
 );

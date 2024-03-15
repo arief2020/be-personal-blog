@@ -22,7 +22,10 @@ class MoviesControllers {
   }
   static async store(req, res, next) {
     try {
-      const movies = await MovieServices.store(req.body);
+      // params = {
+      //   photo
+      // }
+      const movies = await MovieServices.store2(req.body);
       return res.status(201).json(movies);
     } catch (error) {
       next(error);
@@ -50,6 +53,19 @@ class MoviesControllers {
       return res.status(200).json(movies);
     } catch (error) {
       next(error);
+    }
+  }
+
+  static async uploads(req, res, next) {
+    try {
+      const url = await MovieServices.uploads(req.file);
+
+      res.status(201).json({
+        message: "Upload success",
+        image_url: url,
+      });
+    } catch (error) {
+      next(error)
     }
   }
 }

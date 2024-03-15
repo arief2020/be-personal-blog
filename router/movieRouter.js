@@ -1,12 +1,15 @@
 const express = require("express");
 const MoviesControllers = require("../controllers/MoviesControllers");
 const { authorization } = require("../middleware/authHandler");
+const multerMiddleware = require("../middleware/multer");
 
 const router = express.Router();
 
 router.get("/", MoviesControllers.getAll);
 
 router.get("/:id", MoviesControllers.getMoviesById);
+
+router.post("/uploads", multerMiddleware, MoviesControllers.uploads);
 
 router.post("/", authorization, MoviesControllers.store);
 

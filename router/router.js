@@ -2,12 +2,14 @@ const express = require("express");
 
 const router = express.Router();
 
+const path = require("path");
 const swaggerRouter = require('../swagger')
 const movieRouter = require('./movieRouter')
 const userRouter = require('./userRouter')
 const authRouter = require('./authRouter');
 const { authentication } = require("../middleware/authHandler");
 
+router.use("/api/images", express.static(path.join(__dirname, "../uploads")))
 router.use('/', swaggerRouter)
 router.use('/api/auth', authRouter)
 router.use(authentication)
