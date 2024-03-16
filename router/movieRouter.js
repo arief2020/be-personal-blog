@@ -9,7 +9,7 @@ router.get("/", MoviesControllers.getAll);
 
 router.get("/:id", MoviesControllers.getMoviesById);
 
-router.post("/uploads", multerMiddleware, MoviesControllers.uploads);
+router.post("/uploads", multerMiddleware.single('photo'), MoviesControllers.uploads);
 
 router.post("/", authorization, MoviesControllers.store);
 

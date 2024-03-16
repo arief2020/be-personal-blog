@@ -70,29 +70,6 @@ class MovieServices {
       throw error;
     }
   }
-  static async store2(params) {
-    try {
-      let { title, genres, year } = params;
-
-      if (!title || !genres || !year) {
-        throw {
-          name: "BadRequest",
-          message: "field must be required by title, genres, and year",
-        };
-      }
-
-      const movies = await MovieRepository.createMovies({
-        title,
-        genres,
-        year,
-        photo
-      });
-
-      return { message: "Success Create Movies", data: movies };
-    } catch (error) {
-      throw error;
-    }
-  }
   static async update(params) {
     try {
       let {id, body} = params

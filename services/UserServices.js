@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const fs = require('fs')
 const UserRepository = require("../repositories/UserRepository");
 const { hashPassword } = require("../libs/bcrypt");
 const DEFAULT_LIMIT = 10;
@@ -84,11 +85,21 @@ class UserServices {
   static async destroy(params) {
     try {
       let { id } = params;
-      const user = await UserRepository.destroy(+id);
-      console.log(user)
-      if (user === 0) {
-        throw { name: "ErrorNotFound", message: "Users Not Found" };
-      }
+      const user = await UserRepository.getUserById(+id)
+      if (user === null)
+        throw { name: "ErrorNotFound", message: "User Not Found" };
+
+      const photoUser = user.Profile.photo_user
+      const image = photoUser.replace(
+        `${process.env.BASE_URL}/api/images/`,
+        ""
+      );
+      fs.unlink(`./uploads/${image}`, function (err) {
+        if (err) throw err;
+        console.log("File deleted!");
+      }); 
+
+      await UserRepository.destroy(+id);
       return { message: "Success Delete Users" };
     } catch (error) {
       throw error;

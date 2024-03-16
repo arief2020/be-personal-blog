@@ -12,6 +12,6 @@ const diskStorage = multer.diskStorage({
 })
 
 
-const multerMiddleware = multer({storage: diskStorage}).single("photo");
+const multerMiddleware = multer({storage: diskStorage});
 
 module.exports = multerMiddleware;

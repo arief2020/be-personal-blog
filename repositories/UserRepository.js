@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Profile } = require("../models");
 
 class UserRepository {
   static async getAllAndCount(limit, offset) {
@@ -6,6 +6,7 @@ class UserRepository {
       const { rows, count } = await User.findAndCountAll({
         offset,
         limit,
+        include: Profile
       });
       return { rows, count };
     } catch (error) {
@@ -14,7 +15,9 @@ class UserRepository {
   }
   static async getUserById(id) {
     try {
-      const movie = await User.findByPk(id);
+      const movie = await User.findOne({where:{
+        id
+      }, include: Profile});
       return movie;
     } catch (error) {
       throw error;

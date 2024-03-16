@@ -7,7 +7,7 @@ dotenv.config()
 class AuthService {
   static async register(params) {
     try {
-      const { email, password, confirmPassword, role, gender } = params;
+      const { email, password, confirmPassword, role, gender, profile } = params;
 
       if (password != confirmPassword) {
         throw {
@@ -22,7 +22,7 @@ class AuthService {
         password: hashingPassword,
         role,
         gender,
-      });
+      }, profile);
       return { message: "Success register users", data: register };
     } catch (error) {
       throw error;

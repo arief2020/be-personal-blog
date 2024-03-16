@@ -1,4 +1,3 @@
-const { Movies } = require("../models");
 const MovieServices = require("../services/MovieServices");
 
 class MoviesControllers {
@@ -22,10 +21,7 @@ class MoviesControllers {
   }
   static async store(req, res, next) {
     try {
-      // params = {
-      //   photo
-      // }
-      const movies = await MovieServices.store2(req.body);
+      const movies = await MovieServices.store(req.body);
       return res.status(201).json(movies);
     } catch (error) {
       next(error);
