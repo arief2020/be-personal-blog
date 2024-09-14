@@ -1,0 +1,65 @@
+Table User {
+  id integer PK
+  username varchar
+  email varchar
+  password varchar
+  profile_picture varchar
+  bio varchar
+}
+
+Table Post{
+  id integer PK
+  content varchar
+  created_at datetime
+  updated_at datetime
+  user_id integer
+  category_id integer
+}
+
+
+Table Category {
+  id integer PK
+  name varchar
+  description varchar
+}
+
+Table Comment {
+  id integer PK
+  content varchar
+  created_at datetime
+  post_id integer
+  user_id integer
+}
+
+Table Tag{
+  id integer PK
+  name varchar
+}
+
+Table PostTag {
+  id integer PK
+  tag_id integer
+  post_id integer
+}
+
+Table Like {
+  id integer PK
+  user_id integer
+  post_id integer
+}
+
+Ref: "Post"."user_id" < "User"."id"
+
+Ref: "Post"."category_id" < "Category"."id"
+
+Ref: "Comment"."post_id" < "Post"."id"
+
+Ref: "Comment"."user_id" < "User"."id"
+
+Ref: "Like"."user_id" < "User"."id"
+
+Ref: "Like"."post_id" < "Post"."id"
+
+Ref: "PostTag"."tag_id" < "Tag"."id"
+
+Ref: "PostTag"."post_id" < "Post"."id"
